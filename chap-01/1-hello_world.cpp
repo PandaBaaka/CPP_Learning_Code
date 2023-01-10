@@ -1,1 +1,6 @@
-// Implement the program here.
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hi everyone!" << std::endl;
+}
