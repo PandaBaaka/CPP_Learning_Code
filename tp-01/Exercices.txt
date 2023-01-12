@@ -1,0 +1,130 @@
+Exercice 1 :
+
+    1.
+
+    L'un des avantages d'un langage dit "compilé" ou "semi-compilé" 
+    comparé à un langage dit "interpreté" est que le programme 
+    est généralement plus rapide à exécuter, puisqu’il n’est pas 
+    nécessaire de passer par un interpréteur.
+
+    L'un des désavantages d'un langage dit "compilé" ou "semi-compilé" 
+    comparé à un langage dit "interpreté" est que l'executable
+    ne sera pas portable et donc qu'il faudra recompiler le programme 
+    pour chacun des systèmes sur lequel il devra être exécuté.
+
+    2.
+
+    La différence entre une erreur de compilation et une erreur
+    d'exécution sont que l'erreur de compilation arrive lors
+    de la compilation (donc générée par le compilateur avant
+    l'execution) alors que l'erreur d'execution arrive lorsque
+    le programme est lancé et en cours d'execution et qu'il plante.
+
+    L'erreur de compilation vient du programmeur qui a fait quelque
+    chose que le compilateur ne peut traduire en assembleur et 
+    l'erreur d'execution vient de l'utilisateur qui a utilisé
+    des instances illogiques ou non prévues par le programmeur.
+
+    3.
+
+    L'expression "undefined behavior" signifie en pratique que
+    le résultat de l'execution du programme est imprédictible.
+
+    On peut compiler du code en étant mais au moment de son
+    execution on peut avoir des résultats différents selon
+    les machines.
+
+Exercice 2:
+
+    1.
+
+    Sans -Werror :
+    
+        const short s1; -> uninitialized
+        Solution : initialiser la variable à sa création
+
+        bool b3{i1}; -> narrowing conversion
+        Solution : initialiser avec 0 ou 1 simplement qui
+        seront vus comme des boolean
+
+        char c8{"a"}; -> invalid conversion
+        Solution : initialiser avec le caractère 'a' et
+        non la chaine de caractères "a"
+
+        double& d12; -> declared as reference but not initialized
+        Solution : donner l'objet sur lequelle notre référence
+        est déclarée (double& d12{d11})
+
+        int& i15 = i1; -> binding reference discards qualifiers
+        Solution : i1 étant une const on ne peut la référer
+        qu'avec une référence constante (const int& i15 = i1;)
+
+        int& i16 = b2; -> cannot bind non-const lvalue reference 
+        of type 'int&' to a value of type 'bool'
+        Solution : on ne peut dire qu'un booleen qui n'est pas
+        une référence est une référence sur les entiers (bool& 
+        i16 = b2;)
+
+    Avec -Werror :
+
+        Les mêmes que précédemment
+
+    2.
+
+    s0 vaut 0 (valeur par défaut)
+
+    ul7 vaut 65543
+
+Exercice 3:
+
+    1.
+
+    #include <iostream>
+
+    int add(const int a, const int b) {
+        return a + b;
+    }
+
+    void add_to(int& a, const int b) {
+        a += b;
+    }
+
+    int main() {
+        const int x{10};
+        int y = add(x, x);
+        add_to(y, 22);
+        std::cout << y << std::endl;
+        return 0;
+    }
+
+    2.
+
+    Passage par valeur :
+
+        Les variables sont copiées à l'appel et les
+        modifications effectuées à l’intérieur de la 
+        fonction ne sont donc pas répercutées dans le 
+        code appelant.
+
+    Passage par référence :
+        
+        Les variables ne sont plus copiées par la fonction
+        appelante mais sont accédées par adresses ce qui
+        permet d'éviter cette copie, les objets restent
+        modifiables cependant.
+
+    Passage par référence constante :
+
+        On empêche de modifier des choses qu’on souhaiterait 
+        que la fonction ne modifie pas en plus d'empêcher la
+        copie.
+
+    3.
+
+    int count_a_occurrences(const std::string& s);
+
+    void update_loop(const float& dt, std::string& errors_out);
+
+    bool are_all_positives(const std::vector<int>& values, int negative_indices_out[], size_t& negative_count_out);
+
+    std::string concatenate(const char* str1, const char* str2);
