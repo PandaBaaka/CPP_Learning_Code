@@ -14,7 +14,8 @@ void                         translate(vector<string>& sentence, vector<pair<str
 
 int main(int argc, char* argv[])
 {
-    const char *dict_path, word, translation, sentence;
+    const string         dict_path, word, translation;
+    const vector<string> sentence;
 
     if (!parse_params(argc, argv, dict_path, translation, sentence))
     {
